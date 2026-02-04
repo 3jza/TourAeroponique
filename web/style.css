@@ -1,0 +1,417 @@
+/*
+ * Projet Tour Aéroponique Automatisée - STI2D SIN
+ * Feuille de style CSS pour l'interface de supervision
+ * 
+ * Design sobre et lisible, adapté à un projet scolaire
+ */
+
+/* Réinitialisation des styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles généraux */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* En-tête */
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* Section principale avec les cartes */
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Style des cartes */
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* En-tête de carte */
+.card-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.card-header h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Corps de carte */
+.card-body {
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+}
+
+.value {
+    font-size: 4em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1;
+}
+
+.unit {
+    font-size: 1.5em;
+    color: #666;
+    margin-left: 5px;
+}
+
+/* Pied de carte */
+.card-footer {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.status {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+}
+
+/* Couleurs spécifiques par type de mesure */
+.temperature .card-header {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    color: white;
+}
+
+.temperature .value {
+    color: #ff6b6b;
+}
+
+.humidity .card-header {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+}
+
+.humidity .value {
+    color: #4ecdc4;
+}
+
+.luminosite .card-header {
+    background: linear-gradient(135deg, #feca57, #ff9ff3);
+    color: white;
+}
+
+.luminosite .value {
+    color: #feca57;
+}
+
+/* Pied de page avec informations système */
+footer {
+    margin-top: 40px;
+}
+
+.info-box {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.info-box p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+.indicator-dot.connected {
+    background-color: #4ecdc4;
+}
+
+.indicator-dot.disconnected {
+    background-color: #ff6b6b;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive design pour petits écrans */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+    
+    main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .value {
+        font-size: 3em;
+    }
+}
+
+/* Animation de chargement */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Section historique */
+.historique-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.historique-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.historique-header h2 {
+    font-size: 2em;
+    color: #333;
+    margin: 0;
+}
+
+/* Bouton d'export */
+.export-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.export-btn:active {
+    transform: translateY(0);
+}
+
+/* Conteneur de tableau */
+.tableau-container {
+    margin-bottom: 40px;
+}
+
+.tableau-container:last-child {
+    margin-bottom: 0;
+}
+
+.tableau-container h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Wrapper pour le tableau (avec scroll si nécessaire) */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style des tableaux */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 0.95em;
+}
+
+.data-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.data-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.data-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Styles spécifiques par type de tableau */
+.temperature-table thead {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+}
+
+.humidity-table thead {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.luminosite-table thead {
+    background: linear-gradient(135deg, #feca57, #ff9ff3);
+}
+
+/* Badge de statut */
+.statut-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statut-badge.statut-normale {
+    background-color: #4ecdc4;
+    color: white;
+}
+
+.statut-badge.statut-basse,
+.statut-badge.statut-faible {
+    background-color: #ffd93d;
+    color: #333;
+}
+
+.statut-badge.statut-elevee {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+/* Message "aucune donnée" */
+.no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 30px !important;
+}
+
+/* Responsive pour les tableaux */
+@media (max-width: 768px) {
+    .historique-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .historique-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .export-btn {
+        width: 100%;
+    }
+    
+    .tableau-container h3 {
+        font-size: 1.2em;
+    }
+    
+    .data-table {
+        font-size: 0.85em;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+    }
+}
+

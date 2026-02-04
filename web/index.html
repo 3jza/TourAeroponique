@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Aéroponique - Supervision</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête de la page -->
+        <header>
+            <h1>🌱 Tour Aéroponique Automatisée</h1>
+            <p class="subtitle">Système de supervision - STI2D SIN</p>
+        </header>
+
+        <!-- Section principale d'affichage des données -->
+        <main>
+            <!-- Carte de la température -->
+            <div class="card temperature">
+                <div class="card-header">
+                    <h2>🌡️ Température</h2>
+                </div>
+                <div class="card-body">
+                    <div class="value" id="temperature-value">--</div>
+                    <div class="unit">°C</div>
+                </div>
+                <div class="card-footer">
+                    <span class="status" id="temp-status">En attente...</span>
+                </div>
+            </div>
+
+            <!-- Carte de l'humidité -->
+            <div class="card humidity">
+                <div class="card-header">
+                    <h2>💧 Humidité</h2>
+                </div>
+                <div class="card-body">
+                    <div class="value" id="humidite-value">--</div>
+                    <div class="unit">%</div>
+                </div>
+                <div class="card-footer">
+                    <span class="status" id="humi-status">En attente...</span>
+                </div>
+            </div>
+
+            <!-- Carte de la luminosité -->
+            <div class="card luminosite">
+                <div class="card-header">
+                    <h2>☀️ Luminosité</h2>
+                </div>
+                <div class="card-body">
+                    <div class="value" id="luminosite-value">--</div>
+                    <div class="unit">lux</div>
+                </div>
+                <div class="card-footer">
+                    <span class="status" id="lumi-status">En attente...</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Section historique des mesures -->
+        <section class="historique-section">
+            <div class="historique-header">
+                <h2>📊 Historique des Mesures</h2>
+                <button id="export-btn" class="export-btn">📥 Exporter en Excel</button>
+            </div>
+
+            <!-- Tableau de la température -->
+            <div class="tableau-container">
+                <h3>🌡️ Historique Température</h3>
+                <div class="table-wrapper">
+                    <table class="data-table temperature-table">
+                        <thead>
+                            <tr>
+                                <th>Horodatage</th>
+                                <th>Température (°C)</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="temp-table-body">
+                            <tr>
+                                <td colspan="3" class="no-data">Aucune donnée disponible</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tableau de l'humidité -->
+            <div class="tableau-container">
+                <h3>💧 Historique Humidité</h3>
+                <div class="table-wrapper">
+                    <table class="data-table humidity-table">
+                        <thead>
+                            <tr>
+                                <th>Horodatage</th>
+                                <th>Humidité (%)</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="humi-table-body">
+                            <tr>
+                                <td colspan="3" class="no-data">Aucune donnée disponible</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tableau de la luminosité -->
+            <div class="tableau-container">
+                <h3>☀️ Historique Luminosité</h3>
+                <div class="table-wrapper">
+                    <table class="data-table luminosite-table">
+                        <thead>
+                            <tr>
+                                <th>Horodatage</th>
+                                <th>Luminosité (lux)</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lumi-table-body">
+                            <tr>
+                                <td colspan="3" class="no-data">Aucune donnée disponible</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section d'informations système -->
+        <footer>
+            <div class="info-box">
+                <p><strong>Dernière mise à jour :</strong> <span id="horodatage">--</span></p>
+                <p class="status-indicator">
+                    <span class="indicator-dot" id="connection-indicator"></span>
+                    <span id="connection-status">Connexion en cours...</span>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
