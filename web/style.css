@@ -121,6 +121,11 @@ main {
     color: white;
 }
 
+.pH .card-header {
+    background: linear-gradient(135deg, #b9e265, #00ffbd);
+    color: white;
+}
+
 .temperature .value {
     color: #ff6b6b;
 }

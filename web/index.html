@@ -57,6 +57,19 @@
                     <span class="status" id="lumi-status">En attente...</span>
                 </div>
             </div>
+
+            <div class="card pH">
+                <div class="card-header">
+                    <h2>💥​ pH</h2>
+                </div>
+                <div class="card-body">
+                    <div class="value" id="luminosite-value">--</div>
+                    <div class="unit">pH</div>
+                </div>
+                <div class="card-footer">
+                    <span class="status" id="lumi-status">En attente...</span>
+                </div>
+            </div>
         </main>
 
         <!-- Section historique des mesures -->
@@ -90,7 +103,7 @@
             <!-- Tableau de l'humidité -->
             <div class="tableau-container">
                 <h3>💧 Historique Humidité</h3>
-                <div class="table-wrapper">
+                  <div class="table-wrapper">
                     <table class="data-table humidity-table">
                         <thead>
                             <tr>
@@ -129,6 +142,27 @@
                 </div>
             </div>
         </section>
+
+        <!-- Tableau du pH -->
+        <div class="tableau-container">
+            <h3>🧪 Historique pH</h3>
+            <div class="table-wrapper">
+                <table class="data-table ph-table">
+                    <thead>
+                        <tr>
+                            <th>Horodatage</th>
+                            <th>pH</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ph-table-body">
+                        <tr>
+                            <td colspan="3" class="no-data">Aucune donnée disponible</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <!-- Section d'informations système -->
         <footer>
