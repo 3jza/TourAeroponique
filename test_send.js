@@ -6,11 +6,11 @@ const sendData = async () => {
     const data = {
         temp: (Math.random() * 5 + 20).toFixed(1),
         humi: (Math.random() * 10 + 50).toFixed(1),
-        lumi: Math.floor(Math.random() * 500 + 400)
+        lumi: Math.floor(Math.random() * 5000 + 400)
     };
 
     try {
-        const response = await axios.post('http://localhost:3000/update', data);
+        const response = await axios.post('https://touraeroponique.onrender.com/update', data);
         console.log("✅ Données envoyées au serveur :", data, "| Réponse :", response.status);
     } catch (err) {
         console.error("❌ Erreur : Le serveur Node.js est-il lancé ? (", err.message, ")");
