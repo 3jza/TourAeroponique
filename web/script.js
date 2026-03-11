@@ -20,12 +20,14 @@ const elements = {
     temperature: document.getElementById('temperature-value'),
     humidite: document.getElementById('humidite-value'),
     luminosite: document.getElementById('luminosite-value'),
+    ph: document.getElementById('ph-value'),
     horodatage: document.getElementById('horodatage'),
     connectionStatus: document.getElementById('connection-status'),
     connectionIndicator: document.getElementById('connection-indicator'),
     tempStatus: document.getElementById('temp-status'),
     humiStatus: document.getElementById('humi-status'),
-    lumiStatus: document.getElementById('lumi-status')
+    lumiStatus: document.getElementById('lumi-status'),
+    phStatus: document.getElementById('ph-status')
 };
 
 // Variables pour suivre l'état
@@ -37,7 +39,8 @@ let estConnecte = false; // État de connexion du système
 const historique = {
     temperature: [],
     humidite: [],
-    luminosite: []
+    luminosite: [],
+    ph: []
 };
 const MAX_HISTORIQUE = 20; // Nombre maximum d'entrées dans l'historique
 
@@ -65,6 +68,7 @@ async function chargerDonnees() {
             donnees.temperature = parseFloat(donnees.temperature) || 0;
             donnees.humidite = parseFloat(donnees.humidite) || 0;
             donnees.luminosite = parseInt(donnees.luminosite) || 0;
+            donnees.pH = parseFloat(donnees.pH) || 0;
             
             // Réinitialisation du compteur d'erreurs
             nombreErreurs = 0;
@@ -152,6 +156,21 @@ function mettreAJourAffichage(donnees) {
             }
         }
     }
+
+    // Mise à jour du pH
+    if (elements.ph) {
+        elements.ph.textContent = donnees.pH.toFixed(1);
+
+        if (elements.phStatus) {
+            if (donnees.pH < 5.5) {
+                elements.phStatus.textContent = 'pH acide';
+            } else if (donnees.pH > 6.5) {
+                elements.phStatus.textContent = 'pH basique';
+            } else {
+                elements.phStatus.textContent = 'pH optimal';
+            }
+        }
+    }
     
     // Mise à jour de l'horodatage
     if (elements.horodatage && donnees.horodatage) {
@@ -227,6 +246,18 @@ function ajouterAHistorique(donnees) {
     if (historique.luminosite.length > MAX_HISTORIQUE) {
         historique.luminosite.pop();
     }
+
+    // Ajout du pH
+    const statutPh = obtenirStatutPh(donnees.pH);
+    historique.ph.unshift({
+        horodatage: donnees.horodatage || timestamp,
+        valeur: donnees.pH,
+        statut: statutPh.texte,
+        classe: statutPh.classe
+    });
+    if (historique.ph.length > MAX_HISTORIQUE) {
+        historique.ph.pop();
+    }
     
     // Mise à jour des tableaux
     mettreAJourTableaux();
@@ -257,6 +288,15 @@ function obtenirStatutLuminosite(lumi) {
     if (lumi < 300) return { texte: 'Faible', classe: 'faible' };
     if (lumi > 800) return { texte: 'Élevée', classe: 'elevee' };
     return { texte: 'Normale', classe: 'normale' };
+}
+
+/**
+ * Fonction pour obtenir le statut du pH
+ */
+function obtenirStatutPh(ph) {
+    if (ph < 5.5) return { texte: 'Acide', classe: 'faible' };
+    if (ph > 6.5) return { texte: 'Basique', classe: 'elevee' };
+    return { texte: 'Optimal', classe: 'normale' };
 }
 
 /**
@@ -310,6 +350,22 @@ function mettreAJourTableaux() {
             `).join('');
         }
     }
+
+    // Mise à jour du tableau pH
+    const phBody = document.getElementById('ph-table-body');
+    if (phBody) {
+        if (historique.ph.length === 0) {
+            phBody.innerHTML = '<tr><td colspan="3" class="no-data">Aucune donnée disponible</td></tr>';
+        } else {
+            phBody.innerHTML = historique.ph.map(item => `
+                <tr>
+                    <td>${item.horodatage}</td>
+                    <td>${item.valeur.toFixed(1)}</td>
+                    <td><span class="statut-badge statut-${item.classe}">${item.statut}</span></td>
+                </tr>
+            `).join('');
+        }
+    }
 }
 
 /**
@@ -345,6 +401,15 @@ function exporterEnExcel() {
         csvContent += 'Horodatage,Luminosité (lux),Statut\n';
         historique.luminosite.forEach(item => {
             csvContent += `"${item.horodatage}",${item.valeur},"${item.statut}"\n`;
+        });
+
+        csvContent += '\n';
+
+        // Section pH
+        csvContent += 'PH\n';
+        csvContent += 'Horodatage,pH,Statut\n';
+        historique.ph.forEach(item => {
+            csvContent += `"${item.horodatage}",${item.valeur.toFixed(1)},"${item.statut}"\n`;
         });
         
         // Création du blob et téléchargement

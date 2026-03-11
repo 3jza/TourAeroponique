@@ -19,6 +19,7 @@ let donneesActuelles = {
     temperature: 0,
     humidite: 0,
     luminosite: 0,
+    pH: 0,
     horodatage: new Date().toLocaleString('fr-FR')
 };
 
@@ -32,7 +33,7 @@ const MAX_HISTORIQUE = 200;
 // Route pour l'ESP32
 app.post('/update', (req, res) => {
     try {
-        const { temp, humi, lumi } = req.body;
+        const { temp, humi, lumi, pH } = req.body;
         
         if (temp === undefined || humi === undefined || lumi === undefined) {
             return res.status(400).json({ 
@@ -45,6 +46,7 @@ app.post('/update', (req, res) => {
             temperature: parseFloat(temp) || 0,
             humidite: parseFloat(humi) || 0,
             luminosite: parseInt(lumi) || 0,
+            pH: parseFloat(pH) || 0,
             horodatage: new Date().toLocaleString('fr-FR')
         };
         
@@ -57,8 +59,10 @@ app.post('/update', (req, res) => {
             historique = historique.slice(0, MAX_HISTORIQUE);
         }
         
-        console.log(`[${donneesActuelles.horodatage}] ✓ Données reçues :`, 
-                    `${temp}°C, ${humi}%, ${lumi}lux`);
+        console.log(
+            `[${donneesActuelles.horodatage}] ✓ Données reçues :`,
+            `${temp}°C, ${humi}%, ${lumi}lux, pH ${pH}`
+        );
         
         res.status(200).json({ 
             status: "success",

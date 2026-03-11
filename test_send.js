@@ -6,8 +6,8 @@ const sendData = async () => {
     const data = {
         temp: (Math.random() * 5 + 20).toFixed(1),
         humi: (Math.random() * 10 + 50).toFixed(1),
-        lumi: Math.floor(Math.random() * 5000 + 400)
-        pH: Math.floor(Math.random() * 14 + 0).toFixed(1),
+        lumi: Math.floor(Math.random() * 5000 + 400),
+        pH: (Math.random() * 14).toFixed(1),
     };
 
     try {
